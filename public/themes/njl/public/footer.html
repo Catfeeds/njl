@@ -1,0 +1,39 @@
+<div class="met-links text-center">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li>友情链接 :</li>
+            <links>
+                <li><a href="{$vo.url|default=''}" target="{$vo.target|default=''}">{$vo.name|default=''}</a></li>
+            </links>
+        </ol>
+    </div>
+</div>
+<footer>
+    <div class="container text-center">
+        <p>{$site_info.site_banquan}</p>
+        <div class="powered_by_metinfo"><a href="http://www.miibeian.gov.cn" target="_blank">{$site_info.site_icp}</a></div>
+    </div>
+</footer>
+
+<button type="button" class="btn btn-icon btn-primary btn-squared met-scroll-top hide"><i class="icon wb-chevron-up"
+                                                                                          aria-hidden="true"></i>
+</button>
+<script src="/style/js/index.js"></script>
+<script type="text/javascript" async src="/style/js/su.js"></script>
+<script>
+    $(function () {
+        $("#main-menu a").each(function() {
+            if ($(this)[0].href == String(window.location)) {
+                $(this).addClass("active");
+            }
+        });
+        $("#two_menu a").each(function() {
+            if ($(this)[0].href == String(window.location)) {
+                $(this).addClass("active");
+            }
+        });
+    })
+</script>
+</body>
+</html>
+{$site_info.site_analytics}

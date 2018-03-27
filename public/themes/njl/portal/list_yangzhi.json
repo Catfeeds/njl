@@ -1,0 +1,8 @@
+{
+    "name": "农庄养殖列表页",
+    "action": "portal/List/index",
+    "description": "农庄养殖列表模板文件",
+    "order": 10.0,
+    "more": {
+    }
+}

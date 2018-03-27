@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{$category.seo_title|default=$category.name}</title>
+    <meta name="keywords" content="{$category.seo_keywords}"/>
+    <meta name="description" content="{$category.seo_description}"/>
+    <include file="public@head"/>
+
+<body>
+<!--[if lte IE 8]>
+<div class="text-center padding-top-50 padding-bottom-50 bg-blue-grey-100">
+    <p class="browserupgrade font-size-18">你正在使用一个<strong>过时</strong>的浏览器。请<a href="http://browsehappy.com/"
+                                                                              target="_blank">升级您的浏览器</a>，以提高您的体验。</p>
+</div>
+<![endif]-->
+<header id="masthead" class="site-header position1">
+    <include file="public@tophead"/>
+    <include file="public@nav"/>
+</header>
+
+<div class="met-banner banner-ny-h" data-height='' style=''>
+    <div class="slick-slide">
+        <include file="public@lm_banner"/>
+    </div>
+</div>
+<div class="met-column-nav ">
+    <div class="container">
+        <div class="row">
+            <div class="sidebar-tile">
+                <ul class="met-column-nav-ul invisible-xs" id="two_menu">
+                    <if condition="$category.id eq 3">
+                        <else/>
+                        <subNavigation parent="3" root="">
+                            <li><a href='{$menu.href}' class='link'>{$menu.name}</a></li>
+                        </subNavigation>
+                    </if>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="met-img animsition">
+    <div class="container">
+        <div class="row">
+            <ul class="blocks-100 blocks-sm-2 blocks-md-4 blocks-xlg-4  met-page-ajax" data-scale='0.65625'>
+                <php>
+                    if($category['id'] == 1){
+                        $ids = get_all_child(1);
+                    }else{
+                        $ids = $category['id'];
+                    };
+                    $page = [
+                        'list_rows' => 12,
+                        'next' => '下一页',
+                        'prev' => '上一页'
+                    ];
+                </php>
+                <portal:articles categoryIds="$ids" order="post.published_time desc" page="$page" limit="12" item="vo">
+                    <li class="widget ">
+                        <div class="cover overlay overlay-hover">
+                            <img class="cover-image overlay-scale" src="{:cmf_get_image_url($vo.more.thumbnail)}" alt="{$vo.post_title}" style='height:300px;'/>
+                            <div class="overlay-panel overlay-fade overlay-background overlay-background-fixed text-center vertical-align">
+                                <div class="vertical-align-middle">
+                                    <div class="widget-time widget-divider"><span>{$vo.published_time|date='Y-m-d',###}</span></div>
+                                    <h3 class="widget-title margin-bottom-20 font-weight-300">{$vo.post_title}</h3>
+                                    <button type="button" class="btn btn-outline btn-squared btn-inverse met-img-showbtn"
+                                            data-imglist="{$vo.post_title}*{:cmf_get_image_url($vo.more.thumbnail)}|">浏览
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </portal:articles>
+            </ul>
+            <div>
+                <div class='met_pager'>
+                    <page />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="public@footer"/>

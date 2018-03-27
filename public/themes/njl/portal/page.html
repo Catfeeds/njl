@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{$page.post_title}</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <include file="public@head" />
+
+<body>
+<!--[if lte IE 8]>
+<div class="text-center padding-top-50 padding-bottom-50 bg-blue-grey-100">
+    <p class="browserupgrade font-size-18">你正在使用一个<strong>过时</strong>的浏览器。请<a href="http://browsehappy.com/" target="_blank">升级您的浏览器</a>，以提高您的体验。</p>
+</div>
+<![endif]-->
+<header id="masthead" class="site-header position1">
+    <include file="public@tophead" />
+    <include file="public@nav" />
+</header>
+
+<div class="met-banner banner-ny-h" data-height='' style=''>
+    <div class="slick-slide">
+        <include file="public@lm_banner" />
+    </div>
+</div>
+<div class="met-column-nav ">
+    <div class="container">
+        <div class="row">
+            <div class="sidebar-tile">
+                <ul class="met-column-nav-ul invisible-xs" id="two_menu">
+                    <subNavigation parent="2" root="">
+                        <li><a href='{$menu.href}' class='link'>{$menu.name}</a></li>
+                    </subNavigation>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="met-show animsition">
+    <div class="container">
+        <div class="row">
+            <div class="met-editor lazyload clearfix">
+                <div>{$page.post_content}</div>
+            </div>
+        </div>
+    </div>
+</section>
+<include file="public@footer" />

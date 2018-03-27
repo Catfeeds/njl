@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{$category.seo_title|default=$category.name}</title>
+    <meta name="keywords" content="{$category.seo_keywords}"/>
+    <meta name="description" content="{$category.seo_description}"/>
+    <meta name="renderer" content="webkit">
+    <include file="public@head"/>
+
+<body>
+<!--[if lte IE 8]>
+<div class="text-center padding-top-50 padding-bottom-50 bg-blue-grey-100">
+    <p class="browserupgrade font-size-18">你正在使用一个<strong>过时</strong>的浏览器。请<a href="http://browsehappy.com/"
+                                                                              target="_blank">升级您的浏览器</a>，以提高您的体验。</p>
+</div>
+<![endif]-->
+<header id="masthead" class="site-header position1">
+    <include file="public@tophead"/>
+    <include file="public@nav"/>
+</header>
+
+<div class="met-banner banner-ny-h" data-height='' style=''>
+    <div class="slick-slide">
+        <include file="public@lm_banner"/>
+    </div>
+</div>
+<section class="met-news animsition ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 met-news-body">
+                <div class="row">
+                    <div class="met-news-list">
+                        <ul class="met-page-ajax" data-scale='0.71428571428571'>
+                            <php>
+                                if($category['id'] == 5){
+                                    $ids = get_all_child(5);
+                                }else{
+                                    $ids = $category['id'];
+                                }
+                                $page = [
+                                    'list_rows' => 6,
+                                    'next' => '下一页',
+                                    'prev' => '上一页'
+                                ];
+                            </php>
+                            <portal:articles categoryIds="$ids" order="post.published_time desc" limit="6" page="$page" item="vo">
+                                <li class="">
+                                    <div class="media media-lg">
+                                        <div class="media-left">
+                                            <a href="{:cmf_url('portal/Article/index',['id'=>$vo.id,'cid'=>$vo.category_id])}" title="{$vo.post_title}" target='_self'>
+                                                <img class="media-object" src="{:cmf_get_image_url($vo.more.thumbnail)}" style='height:150px;' alt="{$vo.post_title}">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">
+                                                <a href="{:cmf_url('portal/Article/index',['id'=>$vo.id,'cid'=>$vo.category_id])}" title="{$vo.post_title}" target='_self'>{$vo.post_title}</a>
+                                            </h4>
+                                            <p class="des">{$vo.post_excerpt}</p>
+                                            <p class="info">
+                                                <span>{$vo.published_time|date='Y-m-d',###}</span>
+                                                <span>小编</span>
+                                                <span><i class="icon wb-eye margin-right-5" aria-hidden="true"></i>{$vo.post_hits} </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </portal:articles>
+                        </ul>
+                        <div>
+                            <div class='met_pager'>
+                                <page/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <include file="public@config" />
+        </div>
+    </div>
+</section>
+<include file="public@footer"/>

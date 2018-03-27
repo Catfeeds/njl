@@ -1,0 +1,221 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{$site_info.site_seo_title|default='网站首页'}</title>
+    <meta name="keywords" content="{$site_info.site_seo_keywords}"/>
+    <meta name="description" content="{$site_info.site_seo_description}"/>
+    <include file="public@head"/>
+
+<body>
+<!--[if lte IE 8]>
+<div class="text-center padding-top-50 padding-bottom-50 bg-blue-grey-100">
+    <p class="browserupgrade font-size-18">你正在使用一个<strong>过时</strong>的浏览器。请<a href="http://browsehappy.com/"
+                                                                              target="_blank">升级您的浏览器</a>，以提高您的体验。</p>
+</div>
+<![endif]-->
+<header id="masthead" class="site-header position">
+    <include file="public@tophead"/>
+    <include file="public@nav"/>
+</header>
+
+<div class="met-banner" data-height='' style=''>
+    <slides id="1">
+        <div class="slick-slide">
+            <img class="cover-image" src="{:cmf_get_image_url($vo.image)}"
+                 srcset='{:cmf_get_image_url($vo.image)}' sizes="(max-width: 767px) 767px" alt="">
+        </div>
+    </slides>
+</div>
+<div class="met-index-about met-index-body" style="background-image:url();">
+    <div class="container">
+        <h2 class="invisible" data-plugin="appear" data-animate="slide-top" data-repeat="false">特色农家乐</h2>
+        <p class="desc invisible" data-plugin="appear" data-animate="fade" data-repeat="false">——假期休闲聚会好场所——</p>
+        <ul class="blocks-100 blocks-sm-2 blocks-md-3 blocks-xlg-3 " data-plugin="matchHeight">
+            <slides id="3">
+                <li class="invisible" data-plugin="appear" data-animate="slide-bottom50" data-repeat="false">
+                    <div class="about-shadow">
+                        <a href="{$vo.url}" title="{$vo.title}">
+                            <img src="{:cmf_get_image_url($vo.image)}" alt="{$vo.title}">
+                        </a>
+                        <a href="{$vo.url}" title="{$vo.title}" class="about-info">
+                            <h3>{$vo.title}</h3>
+                            <p>{$vo.description}</p>
+                        </a>
+                    </div>
+                </li>
+            </slides>
+        </ul>
+        <a href="{:cmf_url('portal/List/index',['id'=>1])}" title="查看更多" class="more">查看更多</a></div>
+</div>
+<div class="met-index-product met-index-body" style="background-image:url();">
+    <div class="container">
+        <h2 class="invisible" data-plugin="appear" data-animate="slide-top" data-repeat="false">活动套餐</h2>
+        <p class="desc invisible" data-plugin="appear" data-animate="fade" data-repeat="false">——Active package——</p>
+        <div class='invisible' data-plugin="appear" data-animate="fade" data-repeat="false">
+            <ul class="nav nav-tabs">
+
+                <li class="active">
+                    <a href="{:cmf_url('portal/List/index',['id'=>5])}" title="全部" data-toggle="tab" data-num='4' data-filter="*">
+                        <h3>全部</h3>
+                    </a>
+                </li>
+                <subNavigation parent="7" root="">
+                    <li>
+                        <a href="{$menu.href}" title="{$menu.name}">
+                            <h3>{$menu.name}</h3>
+                        </a>
+                    </li>
+                </subNavigation>
+            </ul>
+        </div>
+        <ul class="blocks-2 blocks-sm-2 blocks-md-4 blocks-xlg-4 no-space" id='indexprolist' data-scale='0.65625'>
+            <php>
+                $ids = get_all_child(7);
+            </php>
+            <portal:articles categoryIds="$ids" limit="4" order="post.published_time desc" item="vp">
+                <li>
+                    <div class="widget widget-shadow invisible" data-plugin="appear" data-animate="slide-bottom50"
+                         data-repeat="false">
+                        <figure class="widget-header cover">
+                            <a href="{:cmf_url('portal/Article/index',['id'=>$vp.id,'cid'=>$vp.category_id])}"
+                               title="{$vp.post_title}" target='_self'>
+                                <img class="cover-image"
+                                     data-original="{:cmf_get_image_url($vp.more.thumbnail)}?x-oss-process=image/resize,m_fill,h_210,w_320,limit_0"
+                                     style='height:300px;'
+                                     alt="{$vp.post_title}">
+                            </a>
+                        </figure>
+                        <h4 class="widget-title">
+                            <a href="{:cmf_url('portal/Article/index',['id'=>$vp.id,'cid'=>$vp.category_id])}" title="{$vp.post_title}"
+                               target='_self'>{$vp.post_title}</a>
+                        </h4>
+                    </div>
+                </li>
+            </portal:articles>
+
+
+        </ul>
+        <a href="{:cmf_url('portal/List/index',['id'=>7])}" title="活动套餐" class="more">查看更多</a></div>
+</div>
+<div class="met-index-jion met-index-body" style="background-image:url(/style/images/1510133967.jpg);">
+    <div class="container">
+        <h2 class="invisible" data-plugin="appear" data-animate="slide-top" data-repeat="false">客户案例</h2>
+        <p class="desc invisible" data-plugin="appear" data-animate="fade" data-repeat="false">——CASE——</p>
+        <ul class="slick" id="jion">
+            <portal:articles categoryIds="4" order="post.published_time desc" limit="4" item="vi">
+                <li class=""><a href="{:cmf_url('portal/Article/index',['id'=>$vi.id,'cid'=>4])}" title="{$vi.post_title}" class="box-img"> <img
+                        src="{:cmf_get_image_url($vi.more.thumbnail)}" alt="{$vi.post_title}"> </a>
+                    <div class="chef-box-content">
+                        <h3>{$vi.post_title}</h3>
+                        <p>{$vi.post_excerpt}</p>
+                    </div>
+                </li>
+            </portal:articles>
+        </ul>
+    </div>
+</div>
+<div class="met-index-news met-index-body" style="background-image:url();">
+    <div class="container">
+        <h2 class="invisible" data-plugin="appear" data-animate="slide-top" data-repeat="false">游玩攻略</h2>
+        <p class="desc invisible" data-plugin="appear" data-animate="fade" data-repeat="false">——strategy——</p>
+        <ul class="blocks-2" data-scale='0.71428571428571'>
+            <portal:articles categoryIds="6" order="post.published_time desc" limit="4" item="vu">
+                <li class="invisible" data-plugin="appear" data-animate="slide-bottom" data-repeat="false">
+                    <div class="media media-lg">
+                        <div class="media-left">
+                            <a href="{:cmf_url('portal/Article/index',['id'=>$vu.id,'cid'=>6])}" title="{$vu.post_title}"
+                               target='_self'>
+                                <img class="media-object"
+                                     data-original="{:cmf_get_image_url($vu.more.thumbnail)}?x-oss-process=image/resize,m_fill,h_300,w_420,limit_0"
+                                     style='height:80px;' alt="{$vu.post_title}">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">
+                                <a href="{:cmf_url('portal/Article/index',['id'=>$vu.id,'cid'=>6])}"
+                                   title="{$vu.post_title}" target='_self'>{$vu.post_title}</a>
+                            </h4>
+                            <p class="des">{$vu.post_excerpt}</p>
+                            <p class="info">
+                                <span>{$vu.published_time|date='Y-m-d',###}</span>
+                                <span class="margin-left-10">小编</span>
+                                <span class="margin-left-10"><i class="icon wb-eye margin-right-5" aria-hidden="true"></i>{$vu.post_hits}</span>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </portal:articles>
+        </ul>
+        <a href="{:cmf_url('portal/List/index',['id'=>6])}" title="游玩攻略" class="more">查看更多</a></div>
+</div>
+<div class="met-index-contact met-index-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <p style="margin-top: 10px; padding: 0px; font-family: 微软雅黑; line-height: 20px; color: rgb(0, 0, 0); white-space: normal; text-indent: 0em;">
+                    <span style="font-size: 20px;"><strong><span style="color: rgb(255, 255, 255);">联系我们</span></strong></span>
+                </p>
+                <p style="margin-top: 10px; padding: 0px; font-family: 微软雅黑; line-height: 20px; color: rgb(0, 0, 0); white-space: normal; text-indent: 0em;">
+                    <span style="color: rgb(255, 255, 255); font-family: 微软雅黑, " microsoft="" font-size:="">联系方式：{$site_info.site_phone}</span>
+                </p>
+                <p style="margin-top: 10px; padding: 0px; font-family: 微软雅黑; line-height: 20px; color: rgb(0, 0, 0); white-space: normal; text-indent: 0em;">
+                    <span style="color: rgb(255, 255, 255); font-family: 微软雅黑, " microsoft="" font-size:="">地址：{$site_info.site_address}</span>
+                </p>
+                <p style="margin-top: 10px; padding: 0px; font-family: 微软雅黑; line-height: 20px; color: rgb(0, 0, 0); white-space: normal; text-indent: 0em;">
+                    <span style="color: rgb(255, 255, 255); font-family: 微软雅黑, " microsoft="" font-size:="">公交线路：{$site_info.site_gongjiao}</span>
+                </p>
+                <p style="margin-top: 10px; padding: 0px; font-family: 微软雅黑; line-height: 20px; color: rgb(0, 0, 0); white-space: normal; text-indent: 0em;">
+                    <span style="color: rgb(255, 255, 255); font-family: 微软雅黑, " microsoft="" font-size:="">
+                        <img
+                            src="{:cmf_get_image_url($site_info.site_ditu)}" style=" width:100%;" border="0"
+                            vspace="0" title="" alt=""/>
+                    </span>
+                </p>
+                <p style="margin-top: 10px; padding: 0px; font-family: 微软雅黑; line-height: 20px; color: rgb(0, 0, 0); white-space: normal; text-indent: 0em;"><span
+                        style="color: rgb(255, 255, 255); font-family: 微软雅黑, " microsoft="" font-size:=""><br/>
+          </span></p>
+                <p class="font-size-20"></p>
+            </div>
+            <div class="col-md-7">
+                <form action="/plugin/message/admin_index/insert_post.html" class="met-form met-form-validation" enctype="multipart/form-data"
+                      method="post">
+                    <div class="form-group">
+                        <div>
+                            <input name='qq' class='form-control' type='text' placeholder='预约项目'/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <input name='name' class='form-control' type='text' placeholder='姓名'/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <input name='phone' class='form-control' type='text' placeholder='联系方式'/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <input name='address' class='form-control' type='text' placeholder='人数'/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <input name='yysj' class='form-control' type='text' placeholder='预约时间'/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <textarea name='info' class='form-control' placeholder='其他留言' rows='5'></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group margin-bottom-0">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block btn-squared">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="public@footer"/>

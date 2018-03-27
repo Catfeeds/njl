@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{$article.post_title}</title>
+    <meta name="keywords" content="{$article.post_keywords}" />
+    <meta name="description" content="{$article.post_excerpt}" />
+    <include file="public@head" />
+
+<body>
+<!--[if lte IE 8]>
+<div class="text-center padding-top-50 padding-bottom-50 bg-blue-grey-100">
+    <p class="browserupgrade font-size-18">你正在使用一个<strong>过时</strong>的浏览器。请<a href="http://browsehappy.com/" target="_blank">升级您的浏览器</a>，以提高您的体验。</p>
+</div>
+<![endif]-->
+<header id="masthead" class="site-header position1">
+    <include file="public@tophead" />
+    <include file="public@nav" />
+</header>
+
+<section class="met-shownews animsition">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 met-shownews-body">
+                <div class="row">
+                    <div class="met-shownews-header">
+                        <h1>{$article.post_title}</h1>
+                        <div class="info">
+                            <span>{$article.published_time|date='Y-m-d H:m:s',###}</span>
+                            <span>小编</span>
+                            <span><i class="icon wb-eye margin-right-5" aria-hidden="true"></i>{$article.post_hits}</span>
+                        </div>
+                    </div>
+                    <div class='met-showimg-con bg-white'>
+                        <div class='met-showimg-list fngallery margin-0 text-center slick-dotted' id="met-imgs-carousel">
+                            <php>
+                                $photos = $article['more']['photos'];
+                            </php>
+                            <volist name="photos" id="vi">
+                                <div class='slick-slide lg-item-box' data-src="{:cmf_get_image_url($vi.url)}" data-exthumbimage="{:cmf_get_image_url($vi.url)}">
+                                    <span> <img src="{:cmf_get_image_url($vi.url)}" class="img-responsive" alt="" /> </span>
+                                </div>
+                            </volist>
+                        </div>
+                    </div>
+                    <div class="met-editor lazyload clearfix">
+                        <div>
+                            {$article.post_content}
+                            <div id="metinfo_additional"></div>
+                        </div>
+                    </div>
+                    <div class="met-shownews-footer">
+                        <ul class="pager pager-round">
+                            <if condition="$prev_article['id'] eq 0">
+                                <li class='previous disabled'><a href=''>上一篇<span aria-hidden='true' class='hidden-xs'>：没有了</span></a></li>
+                                <else/>
+                                <li class='previous'><a href="{:cmf_url('portal/Article/index',['id'=>$prev_article['id'],'cid'=>$category.id])}">上一篇<span aria-hidden='true' class='hidden-xs'>：{$prev_article.post_title}</span></a></li>
+                            </if>
+                            <if condition="$next_article['id'] eq 0">
+                                <li class='next disabled'><a href=''>下一篇<span aria-hidden='true' class='hidden-xs'>：没有了</span></a></li>
+                                <else/>
+                                <li class='next'><a href="{:cmf_url('portal/Article/index',['id'=>$next_article['id'],'cid'=>$category.id])}">下一篇<span aria-hidden='true' class='hidden-xs'>：{$next_article.post_title}</span></a></li>
+                            </if>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <include file="public@config" />
+        </div>
+    </div>
+</section>
+<include file="public@footer" />

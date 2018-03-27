@@ -1,0 +1,36 @@
+<div class="col-md-3">
+    <div class="row">
+        <div class="met-news-bar">
+            <form  name="formsearch" method="post" action="{:url('Search/index')}">
+                <div class="form-group">
+                    <div class="input-search">
+                        <button type="submit" class="input-search-btn"><i class="icon wb-search" aria-hidden="true"></i></button>
+                        <input type="text" class="form-control" name="keyword" placeholder="Search">
+                    </div>
+                </div>
+            </form>
+            <div class="recommend news-list-md">
+                <h3>为您推荐</h3>
+                <php>
+                    if($category['id'] == 5){
+                    $ids = get_all_child(5);
+                    }else{
+                    $ids = $category['id'];
+                    }
+                    $where = ['recommended' => 1];
+                </php>
+                <ul class="list-group list-group-bordered">
+                    <portal:articles categoryIds="$ids" where="$where" limit="10" order="post.published_time desc" item="vp">
+                        <li class="list-group-item">
+                            <a href="{:cmf_url('portal/Article/index',['id'=>$vp.id,'cid'=>$vp.category_id])}"
+                               title="{$vp.post_title}" target='_self'>{$vp.post_title}</a>
+                        </li>
+                    </portal:articles>
+                </ul>
+            </div>
+            <ul class="column">
+                <li><a href="{:cmf_url('portal/List/index',['id'=>$category.id])}" title="所有文章" target='_self'>所有文章</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

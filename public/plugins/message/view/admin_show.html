@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+    <include file="public/head"/>
+    <title>留言详细</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a>留言详细</a></li>
+    </ul>
+
+    <div class="common-form">
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table table-bordered">
+                    <input type="hidden" name="id" value="{$data.id}" />
+                    <tr>
+                        <th width="100">姓名：</th>
+                        <td>
+                            {$data.name}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">电话：</th>
+                        <td>
+                            {$data.phone}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">预约项目：</th>
+                        <td>
+                            {$data.qq|default=''}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">人数：</th>
+                        <td>
+                            {$data.address|default=''}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">预约时间：</th>
+                        <td>
+                            {$data.yysj|default=''}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">留言：</th>
+                        <td>
+                            {$data.info|default=''}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th width="100">留言时间：</th>
+                        <td>
+                            {$data.create_time|date='Y-m-d H:i:s',###}
+                        </td>
+                    </tr>
+                </table>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <!--<button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>-->
+                        <a class="btn btn-default" href="{:cmf_plugin_url('Message://AdminIndex/index')}">{:lang('BACK')}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+留言插件前台post地址：{:cmf_plugin_url('Message://AdminIndex/insert_post')}
+<include file="public/scripts"/>
+</body>
+</html>

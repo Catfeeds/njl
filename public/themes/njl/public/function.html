@@ -1,0 +1,10 @@
+<php>
+use think\Db;
+
+// 获取其下的所有id
+function get_all_child($id){
+	$ids = Db::name('portal_category')->where("status = 1 and (id=$id or path like '%-$id-%')")->order('id asc')->column('id');
+	return $ids;
+}
+
+</php>
